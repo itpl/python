@@ -1,0 +1,47 @@
+#! /bin/bash
+#
+################ Script Info ################       
+
+## Program: Program Service Manage Script V1.0
+## Author:  Clumart.G(翅儿学飞)
+## Date:    2014-05-09
+## Update:  2014050901 None
+
+################ Env Define ################
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin:~/sbin
+LANG=zh_CN.UTF8
+export PATH
+export LANG
+
+PGNAME="script-1.0.0"
+CWD=$(pwd)
+rc=0
+
+# See how we were called.
+case "$1" in
+    start)
+        bin/${PGNAME}.py
+        ;;
+    stop)
+        killall ${PGNAME}
+        ;;
+    status)
+        if [ `ps aux|grep ${PGNAME} |grep -v grep |wc -l` -gt 0 ]; then
+            echo "${PGNAME} is running."
+        else
+            echo "${PGNAME} is not running."
+        fi
+	    ;;
+    restart|reload|force-reload)
+        cd "$CWD"
+    	$0 stop
+    	$0 start
+	    rc=$?
+	    ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|reload|force-reload}"
+        exit 2
+esac
+
+exit $rc
