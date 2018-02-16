@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Program: new file V1.0
+# Author:  Clumart.G(翅儿学飞)
+# Date:    2018-02-12
+# Update:  2018021201 None
+
+#Build-in Module
+import os
+import sys
+import string
+
+#Third Part Module
+
+#Project Module
+file_path = os.path.realpath(__file__)
+file_dir = os.path.dirname(file_path)
+home_dir = os.path.dirname(file_dir)
+
+sys.path.append(home_dir+"/lib/")
+import loadconf
+import log 
+
+#Project code
+class MyClass():
+    '''Class Documents.'''
+     
+    def __init__(self):
+        '''
+        Summary:One word.
+        
+        Description:Detail description
+         
+        @param  string  var variable explanation
+        
+        @return None
+        '''
+        #add code here
+        
+    def your_function(self):
+        '''
+        Summary:One word.
+        
+        Description:Detail description
+         
+        @param  string  var variable explanation
+        
+        @return None
+        '''
+        #add code here
+              
+#Run myself
+if __name__ == '__main__':
+    a = MyClass()
+    a.your_function()
