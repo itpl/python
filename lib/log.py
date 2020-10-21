@@ -107,28 +107,29 @@ class LogRecord():
         @return None
         '''
         self.ilog = logging.getLogger(log_name)
-        if self.log_level=="CRITICAL":
-            self.ilog.setLevel(logging.CRITICAL) 
-        elif self.log_level=="ERROR":
-            self.ilog.setLevel(logging.ERROR) 
-        elif self.log_level=="WARNING":
-            self.ilog.setLevel(logging.WARNING) 
-        elif self.log_level=="INFO":
-            self.ilog.setLevel(logging.INFO) 
-        elif self.log_level=="DEBUG":
-            self.ilog.setLevel(logging.DEBUG) 
-        else: 
-            self.ilog.setLevel(logging.WARNING) 
-         
-        main_handler = logging.handlers.TimedRotatingFileHandler(self.main_file, when='midnight', interval=1, backupCount=7, atTime=datetime.time(0, 0, 0, 0))
-        main_handler.setFormatter(logging.Formatter("[%(asctime)s][%(levelname)s]:%(message)s"))
-        error_handler = logging.FileHandler(self.error_file)
-        error_handler.setLevel(logging.ERROR)
-        error_handler.setFormatter(logging.Formatter("[%(asctime)s][%(levelname)s]:%(message)s"))
-         
-        self.ilog.addHandler(main_handler)
-        self.ilog.addHandler(error_handler)
-         
+        if not self.ilog.handlers:
+            if self.log_level=="CRITICAL":
+                self.ilog.setLevel(logging.CRITICAL) 
+            elif self.log_level=="ERROR":
+                self.ilog.setLevel(logging.ERROR) 
+            elif self.log_level=="WARNING":
+                self.ilog.setLevel(logging.WARNING) 
+            elif self.log_level=="INFO":
+                self.ilog.setLevel(logging.INFO) 
+            elif self.log_level=="DEBUG":
+                self.ilog.setLevel(logging.DEBUG) 
+            else: 
+                self.ilog.setLevel(logging.WARNING) 
+             
+            main_handler = logging.handlers.TimedRotatingFileHandler(self.main_file, when='midnight', interval=1, backupCount=7, atTime=datetime.time(0, 0, 0, 0))
+            main_handler.setFormatter(logging.Formatter("[%(asctime)s][%(levelname)s]:%(message)s"))
+            error_handler = logging.FileHandler(self.error_file)
+            error_handler.setLevel(logging.ERROR)
+            error_handler.setFormatter(logging.Formatter("[%(asctime)s][%(levelname)s]:%(message)s"))
+             
+            self.ilog.addHandler(main_handler)
+            self.ilog.addHandler(error_handler)
+             
     def log_write(self, log_type=None, log_msg_level=None, log_msg = ""):
         '''
         Summarg: Create a loger.
